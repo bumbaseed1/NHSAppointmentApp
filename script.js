@@ -1,8 +1,8 @@
-// Generating time slots to simulate available appointments, rather than pull from api.
+// Function to generate 15-minute time slots
 function generateTimeSlots() {
     var slots = [];
     for (var hour = 9; hour < 17; hour++) {
-        // Assuming appointments from 9:00 to 16:45
+        // Example: from 9 AM to 5 PM
         for (var minute = 0; minute < 60; minute += 15) {
             var time = `${hour.toString().padStart(2, "0")}:${minute
                 .toString()
@@ -13,64 +13,50 @@ function generateTimeSlots() {
     return slots;
 }
 
-// Simulated availability data
-var availability = {
-    "2024-02-21": generateTimeSlots().filter(
-        (time) => time !== "09:00" && time !== "09:15"
-    ), // Example of filtering out some slots
-    "2024-02-22": generateTimeSlots().filter(
-        (time) => time !== "11:00" && time !== "11:15"
-    ), // Different slots unavailable
-};
-
 $(document).ready(function () {
+    // Update time slots when a date is selected
     $("#appointment-date").change(function () {
-        var selectedDate = $(this).val();
-        var slots = availability[selectedDate] || [];
+        var slots = generateTimeSlots(); // Generate slots for any day
         var $timeSelect = $("#appointment-time");
-
         $timeSelect.empty(); // Clear existing options
-        if (slots.length > 0) {
-            slots.forEach(function (slot) {
-                $timeSelect.append($("<option>", { value: slot, text: slot }));
-            });
-        } else {
-            $timeSelect.append(
-                $("<option>", { value: "", text: "No available slots" })
-            );
-        }
+
+        slots.forEach(function (slot) {
+            $timeSelect.append($("<option>", { value: slot, text: slot }));
+        });
     });
 });
 
-//  Form submission and validation
+// Handling form submission for booking appointments
 $("#appointment-form").on("submit", function (e) {
-    e.preventDefault(); // Prevent actual form submission
+    e.preventDefault(); // Prevent the default form submission
 
-    // Simple validation example
-    if (
-        $("#patient-name").val() &&
-        $("#patient-email").val() &&
-        $("#appointment-date").val() &&
-        $("#appointment-time").val()
-    ) {
-        // Simulate form submission
+    // Extracting form values
+    var patientName = $("#patient-name").val();
+    var patientEmail = $("#patient-email").val();
+    var appointmentDate = $("#appointment-date").val();
+    var appointmentTime = $("#appointment-time").val();
+
+    // Simple form validation
+    if (patientName && patientEmail && appointmentDate && appointmentTime) {
+        // Simulate form submission and booking
         alert("Your appointment has been booked successfully.");
-        // Here you would typically send the form data to a server
+
+        // Append the booked appointment details under "Your Appointments"
+        $("#appointment-list").append(
+            // Note the change to #appointment-list
+            `<p>Appointment for ${patientName} on ${appointmentDate} at ${appointmentTime}. Contact Email: ${patientEmail}</p>`
+        );
+
+        // Reset the form (optional)
+        $("#appointment-form")[0].reset();
+        // Update the time slots as the form is reset
+        $("#appointment-time").empty();
+        generateTimeSlots().forEach(function (slot) {
+            $("#appointment-time").append(
+                $("<option>", { value: slot, text: slot })
+            );
+        });
     } else {
         alert("Please fill in all fields.");
-    }
-});
-
-// Example: Show a message when no appointments are available
-$("#appointment-date").change(function () {
-    const selectedDate = $(this).val();
-    // Simulate checking for availability
-    if (!selectedDate) {
-        // Simplified condition for demonstration
-        $("#appointment-details").html(
-            "<p>No appointments are available on the selected date. Please choose another date.</p>"
-        );
-    } else {
-        $("#appointment-details").empty(); // Clear the message if the date is valid
     }
 });
