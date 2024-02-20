@@ -5,8 +5,9 @@
     box-sizing: border-box;
 }
 
-html {
+html, body {
     height: 100%;
+    margin: 0;
 }
 
 body {
@@ -17,7 +18,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    margin: 0;
 }
 
 a {
@@ -32,14 +32,18 @@ header {
 }
 
 main {
+    width: 90%;
     max-width: 960px;
-    margin: 20px auto;
+    margin: 20px auto; /* Keeps main centered */
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    padding-bottom: 2rem;
+    display: flex; /* Ensuring flex layout */
+    flex-direction: row; /* Stack children vertically *//* Center-align the flex items */
+    flex: 1; /* Allow main to take up remaining space */
+    align-items: center; 
 }
+
 
 h1 {
     margin-bottom: 20px;
@@ -86,14 +90,24 @@ button:hover {
 }
 
 #booking-form, #appointment-details {
-    padding: 5rem; /* Adds space below each section */
+    width: 100%; /* Ensure they take up full width of main */
+    max-width: 960px; /* Max width to match main's */
+    padding: 20px; /* Adjusted padding */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
 }
+
+#booking-form h2, #appointment-details h2 {
+    text-align: center; /* Centers the text of the headings */
+    width: 100%; /* Ensures the heading takes full width of its parent container */
+}
+
 
 footer {
     background-color: #007f3b;
     color: #ffffff;
     text-align: center;
     padding: 1rem 0;
+    width: 100%;
 }
 
 
@@ -101,6 +115,19 @@ footer {
 @media (min-width: 768px) {
     main {
         display: flex;
-        justify-content: space-between;
+        flex-direction: row; /* Adjust if necessary, depending on your design */
+        justify-content: center; /* This will center the flex items horizontally */
+        align-items: start; /* Aligns items to the start of the flex container */
+    }
+
+    #booking-form, #appointment-details {
+        flex: 1; /* This allows each section to take up equal space */
+        margin: 0 10px; /* Optional: Adds some space between the sections */
+        /* Ensure any specific widths or max-widths here do not contradict the flex behavior */
     }
 }
+
+.appointment-list {
+    transition: all 0.3s ease-in-out;
+}
+
