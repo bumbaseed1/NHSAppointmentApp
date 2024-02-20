@@ -37,8 +37,8 @@ header {
 #header-logo {
     position: absolute;
     left: 10rem; /* Adjust based on desired spacing from the left edge */
-    height: 10rem; /* Adjust based on your logo size */
-    width: 8rem;
+    height: 38px; /* Adjust based on your logo size */
+    width: 135px;
 }
 
 h1 {
