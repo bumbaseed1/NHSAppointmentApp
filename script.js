@@ -44,7 +44,7 @@ $("#appointment-form").on("submit", function (e) {
         // Append the booked appointment details under "Your Appointments"
         $("#appointment-list").append(
             // Note the change to #appointment-list
-            `<p>Appointment for ${patientName} on ${appointmentDate} at ${appointmentTime}. Contact Email: ${patientEmail}</p>`
+            `<p>Appointment for ${patientName} on ${appointmentDate} at ${appointmentTime}.</p>`
         );
 
         // Reset the form (optional)

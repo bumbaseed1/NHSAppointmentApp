@@ -36,8 +36,7 @@ main {
     max-width: 960px;
     margin: 20px auto; /* Keeps main centered */
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: hsl(0, 0%, 89%);
     display: flex; /* Ensuring flex layout */
     flex-direction: row; /* Stack children vertically *//* Center-align the flex items */
     flex: 1; /* Allow main to take up remaining space */
