@@ -25,10 +25,23 @@ a {
 }
 
 header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the items */
+    position: relative; /* Allows absolute positioning relative to the header */
     background-color: #005EB8;
     color: #fff;
-    padding: 20px 0;
-    text-align: center;
+    padding: 10px 20px;
+}
+
+#header-logo {
+    position: absolute;
+    left: 10rem; /* Adjust based on desired spacing from the left edge */
+    height: 50px; /* Adjust based on your logo size */
+}
+
+h1 {
+    margin: 0; /* Ensures the title is properly centered without default margins */
 }
 
 main {
@@ -36,17 +49,17 @@ main {
     max-width: 960px;
     margin: 20px auto; /* Keeps main centered */
     padding: 20px;
-    background-color: hsl(0, 0%, 89%);
+    background-color: hsl(0, 2%, 93%);
     display: flex; /* Ensuring flex layout */
     flex-direction: row; /* Stack children vertically *//* Center-align the flex items */
     flex: 1; /* Allow main to take up remaining space */
     align-items: center; 
 }
 
-
 h1 {
     margin-bottom: 20px;
     color: #ffffff;
+    flex-grow: 0; /* Prevents the header text from growing */
 }
 
 h2 {
@@ -100,7 +113,6 @@ button:hover {
     width: 100%; /* Ensures the heading takes full width of its parent container */
 }
 
-
 footer {
     background-color: #007f3b;
     color: #ffffff;
@@ -108,7 +120,6 @@ footer {
     padding: 1rem 0;
     width: 100%;
 }
-
 
 /* Responsive Design */
 @media (min-width: 768px) {
