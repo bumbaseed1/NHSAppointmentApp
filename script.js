@@ -1,19 +1,44 @@
+// Generating time slots to simulate available appointments, rather than pull from api.
+function generateTimeSlots() {
+    var slots = [];
+    for (var hour = 9; hour < 17; hour++) {
+        // Assuming appointments from 9:00 to 16:45
+        for (var minute = 0; minute < 60; minute += 15) {
+            var time = `${hour.toString().padStart(2, "0")}:${minute
+                .toString()
+                .padStart(2, "0")}`;
+            slots.push(time);
+        }
+    }
+    return slots;
+}
+
+// Simulated availability data
+var availability = {
+    "2024-02-21": generateTimeSlots().filter(
+        (time) => time !== "09:00" && time !== "09:15"
+    ), // Example of filtering out some slots
+    "2024-02-22": generateTimeSlots().filter(
+        (time) => time !== "11:00" && time !== "11:15"
+    ), // Different slots unavailable
+};
+
 $(document).ready(function () {
-    const appointmentTimes = [
-        "09:00",
-        "10:00",
-        "11:00",
-        "14:00",
-        "15:00",
-        "16:00",
-    ]; // Example slots
-    appointmentTimes.forEach((time) => {
-        $("#appointment-time").append(
-            $("<option>", {
-                value: time,
-                text: time,
-            })
-        );
+    $("#appointment-date").change(function () {
+        var selectedDate = $(this).val();
+        var slots = availability[selectedDate] || [];
+        var $timeSelect = $("#appointment-time");
+
+        $timeSelect.empty(); // Clear existing options
+        if (slots.length > 0) {
+            slots.forEach(function (slot) {
+                $timeSelect.append($("<option>", { value: slot, text: slot }));
+            });
+        } else {
+            $timeSelect.append(
+                $("<option>", { value: "", text: "No available slots" })
+            );
+        }
     });
 });
 
