@@ -1,4 +1,10 @@
 /* Basic Reset */
+:root {
+    --primary-color: #005eb8; /* NHS Blue */
+    --secondary-color: #ffffff; /* White */
+    --font-family: 'Arial', sans-serif;
+  }
+
 * {
     margin: 0;
     padding: 0;
@@ -11,9 +17,9 @@ html, body {
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-family);
+    color: var(--primary-color);
     background-color: #f0f2f5;
-    color: #333;
     line-height: 1.6;
     display: flex;
     flex-direction: column;
@@ -27,22 +33,24 @@ a {
 header {
     display: flex;
     align-items: center;
-    justify-content: center; /* Center the items */
-    position: relative; /* Allows absolute positioning relative to the header */
+    justify-content: center; /* Center items on the main axis */
+    position: relative;
     background-color: #005EB8;
     color: #fff;
     padding: 10px 20px;
 }
 
 #header-logo {
-    position: absolute;
-    left: 10rem; /* Adjust based on desired spacing from the left edge */
-    height: 45px; /* Adjust based on your logo size */
+    position: absolute; /* Use absolute positioning for specific placement */
+    left: 20px; /* Adjust based on desired spacing from the left edge */
+    height: 50px; /* Adjust based on your logo size */
     width: 135px;
 }
 
 h1 {
-    margin: 0; /* Ensures the title is properly centered without default margins */
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 main {
@@ -57,11 +65,6 @@ main {
     align-items: center; 
 }
 
-h1 {
-    margin-bottom: 20px;
-    color: #ffffff;
-    flex-grow: 0; /* Prevents the header text from growing */
-}
 
 h2 {
     margin-bottom: 20px;
@@ -135,6 +138,10 @@ footer {
         flex: 1; /* This allows each section to take up equal space */
         margin: 0 10px; /* Optional: Adds some space between the sections */
         /* Ensure any specific widths or max-widths here do not contradict the flex behavior */
+    }
+
+    .form-group {
+        flex-direction: column;
     }
 }
 
